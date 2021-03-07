@@ -6,6 +6,7 @@ O Smart Saloon é um app simples de gestão de agendamento e clientes em salões
 
 ## Inicializando
 Tudo é controlado pelo arquivo **docker-compose.yaml**, basta acessar a pasta raiz e executar o comando `docker-compose up`
+Pode ser que seja necessário rodar o `docker-compose up` uma segunda vez, pois o composer do PHP finaliza os processos após realizar a instalação das dependências
 
 Pronto! O sistema pode ser acessado pelas seguintes URLs:
 
