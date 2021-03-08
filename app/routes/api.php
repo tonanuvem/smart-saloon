@@ -5,5 +5,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('dogs', 'App\Http\Controllers\api\DogController');
 Route::apiResource('clients', 'App\Http\Controllers\api\ClientController');
-Route::apiResource('employess', 'App\Http\Controllers\api\EmployeeController');
-Route::apiResource('Appointments', 'App\Http\Controllers\api\AppointmentsController');
+Route::apiResource('employees', 'App\Http\Controllers\api\EmployeeController');
+Route::apiResource('appointments', 'App\Http\Controllers\api\AppointmentsController');

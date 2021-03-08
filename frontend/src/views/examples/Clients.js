@@ -15,23 +15,27 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
-import "./assets/plugins/nucleo/css/nucleo.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import "./assets/scss/argon-dashboard-react.scss";
+// reactstrap components
+import {
+  Container,
+} from "reactstrap";
+// core components
+import Header from "../../components/Headers/Header.js";
+import ClientsTable from "./ClientsTable.js";
 
+const Tables = () => {
+  return (
+    <>
+      <Header />
+      {/* Page content */}
+      <Container className="my--7" fluid>
+        {/* Table */}
+        <ClientsTable />
+      </Container>
+    </>
+  );
+};
 
-import AdminLayout from "./layouts/Admin.js";
-
-ReactDOM.render(
-  <BrowserRouter>
-    <Switch>
-      <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-      <Redirect from="/" to="/admin/index" />
-    </Switch>
-  </BrowserRouter>,
-  document.getElementById("root")
-);
+export default Tables;

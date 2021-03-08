@@ -1,6 +1,9 @@
 # Smart Saloon
 Trabalho 2 da matéria Software Engineering Development
 
+| [Vídeo no youtube](#) | [Apresentação](https://drive.google.com/file/d/1wt14H7uKF8qXNFM7AFxFJBMvfgvh6HRe/view?usp=sharing)  |
+| --------------------- |:---------------------------------------------------------------------------------------------------:|
+
 ## Sobre o sistema
 O Smart Saloon é um app simples de gestão de agendamento e clientes em salões de beleza. Com ele é possível fazer a administração de clientes, funcionários, agendamentos e produtos em estoque.
 
