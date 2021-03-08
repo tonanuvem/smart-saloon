@@ -25,13 +25,18 @@ const Header = () => {
   const [employeesNumber, setEmployeesNumber] = useState([]);
 
   useEffect(() => {
+    let hClientsMount = true;
+    let hEmployeesMount = true;
     setClientsNumber('Carregando');
     setEmployeesNumber('Carregando');
     fetch("http://localhost:3001/api/clients")
       .then(res => res.json())
       .then(
         (result) => {
-          setClientsNumber(Object.keys(result).length);
+          if (hClientsMount) {
+            setClientsNumber(Object.keys(result).length);
+            hClientsMount = false;
+          }
         },
         (error) => {
           setClientsNumber('Nada encontrado');
@@ -41,7 +46,10 @@ const Header = () => {
         .then(res => res.json())
         .then(
           (result) => {
-            setEmployeesNumber(Object.keys(result).length);
+            if (hEmployeesMount) {
+              setEmployeesNumber(Object.keys(result).length);
+              hEmployeesMount = false;
+            }
           },
           (error) => {
             setEmployeesNumber('Nada encontrado');

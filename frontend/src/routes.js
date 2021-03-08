@@ -16,12 +16,6 @@
 
 */
 import Index from "./views/Index.js";
-import Profile from "./views/examples/Profile.js";
-import Maps from "./views/examples/Maps.js";
-import Register from "./views/examples/Register.js";
-import Login from "./views/examples/Login.js";
-import Tables from "./views/examples/Tables.js";
-import Icons from "./views/examples/Icons.js";
 import Clients from "./views/examples/Clients.js";
 import Employees from "./views/examples/Employees.js";
 import Appointments from "./views/examples/Appointments.js";
@@ -33,6 +27,7 @@ var routes = [
     icon: "ni ni-tv-2 text-primary",
     component: Index,
     layout: "/admin",
+    showOnMenu: true,
   },
   {
     path: "/clients",
@@ -40,6 +35,7 @@ var routes = [
     icon: "ni ni-planet text-blue",
     component: Clients,
     layout: "/admin",
+    showOnMenu: true,
   },
   {
     path: "/employees",
@@ -47,6 +43,7 @@ var routes = [
     icon: "ni ni-single-02 text-yellow",
     component: Employees,
     layout: "/admin",
+    showOnMenu: true,
   },
   {
     path: "/appointments",
@@ -54,6 +51,7 @@ var routes = [
     icon: "ni ni-bullet-list-67 text-red",
     component: Appointments,
     layout: "/admin",
+    showOnMenu: true,
   },
 ];
 export default routes;
