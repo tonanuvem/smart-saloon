@@ -15,12 +15,40 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // reactstrap components
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
 
 const Header = () => {
+  const [clientsNumber, setClientsNumber] = useState([]);
+  const [employeesNumber, setEmployeesNumber] = useState([]);
+
+  useEffect(() => {
+    setClientsNumber('Carregando');
+    setEmployeesNumber('Carregando');
+    fetch("http://localhost:3001/api/clients")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setClientsNumber(Object.keys(result).length);
+        },
+        (error) => {
+          setClientsNumber('Nada encontrado');
+        }
+      )
+      fetch("http://localhost:3001/api/employees")
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setEmployeesNumber(Object.keys(result).length);
+          },
+          (error) => {
+            setEmployeesNumber('Nada encontrado');
+          }
+        )
+  }, [])
+
   return (
     <>
       <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
@@ -28,7 +56,7 @@ const Header = () => {
           <div className="header-body">
             {/* Card stats */}
             <Row>
-              <Col lg="6" xl="3">
+              <Col lg="12" xl="4">
                 <Card className="card-stats mb-4 mb-xl-0">
                   <CardBody>
                     <Row>
@@ -37,22 +65,22 @@ const Header = () => {
                           tag="h5"
                           className="text-uppercase text-muted mb-0"
                         >
-                          Traffic
+                          Clientes
                         </CardTitle>
                         <span className="h2 font-weight-bold mb-0">
-                          350,897
+                          {clientsNumber}
                         </span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
-                          <i className="fas fa-chart-bar" />
+                          <i className="ni ni-single-02" />
                         </div>
                       </Col>
                     </Row>
                   </CardBody>
                 </Card>
               </Col>
-              <Col lg="6" xl="3">
+              <Col lg="12" xl="4">
                 <Card className="card-stats mb-4 mb-xl-0">
                   <CardBody>
                     <Row>
@@ -61,20 +89,22 @@ const Header = () => {
                           tag="h5"
                           className="text-uppercase text-muted mb-0"
                         >
-                          New users
+                          Funcionários
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">2,356</span>
+                        <span className="h2 font-weight-bold mb-0">
+                          {employeesNumber}
+                        </span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-warning text-white rounded-circle shadow">
-                          <i className="fas fa-chart-pie" />
+                          <i className="ni ni-scissors" />
                         </div>
                       </Col>
                     </Row>
                   </CardBody>
                 </Card>
               </Col>
-              <Col lg="6" xl="3">
+              <Col lg="12" xl="4">
                 <Card className="card-stats mb-4 mb-xl-0">
                   <CardBody>
                     <Row>
@@ -83,35 +113,13 @@ const Header = () => {
                           tag="h5"
                           className="text-uppercase text-muted mb-0"
                         >
-                          Sales
+                          Agendamentos
                         </CardTitle>
                         <span className="h2 font-weight-bold mb-0">924</span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                          <i className="fas fa-users" />
-                        </div>
-                      </Col>
-                    </Row>
-                  </CardBody>
-                </Card>
-              </Col>
-              <Col lg="6" xl="3">
-                <Card className="card-stats mb-4 mb-xl-0">
-                  <CardBody>
-                    <Row>
-                      <div className="col">
-                        <CardTitle
-                          tag="h5"
-                          className="text-uppercase text-muted mb-0"
-                        >
-                          Performance
-                        </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">49,65%</span>
-                      </div>
-                      <Col className="col-auto">
-                        <div className="icon icon-shape bg-info text-white rounded-circle shadow">
-                          <i className="fas fa-percent" />
+                          <i className="ni ni-calendar-grid-58" />
                         </div>
                       </Col>
                     </Row>

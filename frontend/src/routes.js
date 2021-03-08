@@ -22,6 +22,9 @@ import Register from "./views/examples/Register.js";
 import Login from "./views/examples/Login.js";
 import Tables from "./views/examples/Tables.js";
 import Icons from "./views/examples/Icons.js";
+import Clients from "./views/examples/Clients.js";
+import Employees from "./views/examples/Employees.js";
+import Appointments from "./views/examples/Appointments.js";
 
 var routes = [
   {
@@ -35,21 +38,21 @@ var routes = [
     path: "/clients",
     name: "Clientes",
     icon: "ni ni-planet text-blue",
-    component: Icons,
+    component: Clients,
     layout: "/admin",
   },
   {
     path: "/employees",
     name: "Funcionários",
     icon: "ni ni-single-02 text-yellow",
-    component: Profile,
+    component: Employees,
     layout: "/admin",
   },
   {
     path: "/appointments",
     name: "Agendamentos",
     icon: "ni ni-bullet-list-67 text-red",
-    component: Tables,
+    component: Appointments,
     layout: "/admin",
   },
 ];
