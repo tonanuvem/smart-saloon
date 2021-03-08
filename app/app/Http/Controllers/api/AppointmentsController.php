@@ -14,7 +14,7 @@ class AppointmentsController extends Controller
      */
     public function index()
     {
-        //
+        return Appointments::all();
     }
 
     /**
@@ -24,7 +24,7 @@ class AppointmentsController extends Controller
      */
     public function create()
     {
-        //
+        return Appointments::create($request->all());
     }
 
     /**
@@ -35,7 +35,19 @@ class AppointmentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $idClient   = $request->id_client;
+        $idEmployee = $request->id_employee;
+        $date       = $request->date_current;
+
+        $returnAppointments  = Appointments::all();
+        foreach ($returnAppointment as $value) {
+            
+            if ($idEmployee === $value->id_employee) {
+                if ($date !== $value->date_current) {
+                    Appointments::create($request);
+                }
+            }
+        }
     }
 
     /**
@@ -44,34 +56,19 @@ class AppointmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        $returnAppointments  = Appointments::all();
+        foreach ($returnAppointment as $value) {
+            if ($idEmployee === $value->id_employee) {
+                return $value;
+            }
+            if ($idClient === $value->id_client) {
+                return $value;
+            }
+        }
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
+    
     /**
      * Remove the specified resource from storage.
      *
@@ -80,6 +77,7 @@ class AppointmentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $client = Appointments::findOrFail($id);
+        $client->delete();
     }
 }
