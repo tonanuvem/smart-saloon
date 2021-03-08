@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 // reactstrap components
 import {
@@ -30,7 +30,7 @@ const Tables = () => {
     <>
       <Header />
       {/* Page content */}
-      <Container className="my--7" fluid>
+      <Container className="mt--7 mb-4" fluid>
         {/* Table */}
         <ClientsTable />
       </Container>

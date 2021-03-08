@@ -46,7 +46,7 @@ const Login = () => {
               <Button
                 className="btn-neutral btn-icon"
                 color="default"
-                href="#pablo"
+                href="#link"
                 onClick={(e) => e.preventDefault()}
               >
                 <span className="btn-inner--icon">
@@ -63,7 +63,7 @@ const Login = () => {
               <Button
                 className="btn-neutral btn-icon"
                 color="default"
-                href="#pablo"
+                href="#link"
                 onClick={(e) => e.preventDefault()}
               >
                 <span className="btn-inner--icon">
@@ -137,7 +137,7 @@ const Login = () => {
           <Col xs="6">
             <a
               className="text-light"
-              href="#pablo"
+              href="#link"
               onClick={(e) => e.preventDefault()}
             >
               <small>Forgot password?</small>
@@ -146,7 +146,7 @@ const Login = () => {
           <Col className="text-right" xs="6">
             <a
               className="text-light"
-              href="#pablo"
+              href="#link"
               onClick={(e) => e.preventDefault()}
             >
               <small>Create new account</small>

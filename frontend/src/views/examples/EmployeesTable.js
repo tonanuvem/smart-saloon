@@ -37,14 +37,14 @@ import {
 
 const Tables = (props) => {
   const [status, setStatus] = useState('')
-  const [clients, setClients] = useState([]);
-  const [clientEditStatus, setClientEditStatus] = useState([]);
+  const [employees, setEmployees] = useState([]);
+  const [employeeEditStatus, setEmployeeEditStatus] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isError, setIsError] = useState(false);
   const [modal, setModal] = useState(false);
   const [modalStatus, setModalStatus] = useState(false);
 
-  const [clientEdit, setClientEdit] = useState({
+  const [employeeEdit, setEmployeeEdit] = useState({
     id: "",
     name: "",
     address: ""
@@ -59,20 +59,20 @@ const Tables = (props) => {
   const submit = e => {
     e.preventDefault();
 
-    fetch(`http://localhost:3001/api/clients/${clientEdit.id}`, 
+    fetch(`http://localhost:3001/api/employees/${employeeEdit.id}`, 
     { 
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ name: clientEdit.name, address: clientEdit.address, }) 
+      body: JSON.stringify({ name: employeeEdit.name, address: employeeEdit.address, }) 
     })
       .then(res => res.json())
       .then(
         (result) => {
           if (result.status === "success") {
             setStatus("success");
-            searchClient(clientEdit.id);
+            searchEmployee(employeeEdit.id);
             loadAll();
           }
         }
@@ -81,19 +81,19 @@ const Tables = (props) => {
 
   const toggle = (id) => {
     if (modalStatus === false) {
-      searchClient(id);
+      searchEmployee(id);
       setModal(!modal);
       setModalStatus(true);
     } else {
       setModal(!modal);
       setModalStatus(false);
       setStatus(false);
-      setClientEditStatus(false);
+      setEmployeeEditStatus(false);
     }
   }
 
-  const deleteClient = (id) => {
-    fetch(`http://localhost:3001/api/clients/${id}`, { method: 'DELETE', body: '' })
+  const deleteEmployee = (id) => {
+    fetch(`http://localhost:3001/api/employees/${id}`, { method: 'DELETE', body: '' })
       .then(res => res.json())
       .then(
         (result) => {
@@ -104,24 +104,24 @@ const Tables = (props) => {
       )
   }
 
-  const searchClient = (id) => {
-    fetch(`http://localhost:3001/api/clients/${id}`)
+  const searchEmployee = (id) => {
+    fetch(`http://localhost:3001/api/employees/${id}`)
       .then(res => res.json())
       .then(
         (result) => {
           setIsLoaded(true);
           console.log(result);
-          setClientEdit({
+          setEmployeeEdit({
             id: result.id,
             name: result.name,
             address: result.address
           });
-          setClientEditStatus(true);
+          setEmployeeEditStatus(true);
         },
         (error) => {
           setIsLoaded(true);
           setIsError(true);
-          setClientEdit('Nada encontrado');
+          setEmployeeEdit('Nada encontrado');
         }
       )
   }
@@ -130,23 +130,23 @@ const Tables = (props) => {
 
   const loadAll = () => {
     setIsLoaded(false);
-    fetch("http://localhost:3001/api/clients")
+    fetch("http://localhost:3001/api/employees")
       .then(res => res.json())
       .then(
         (result) => {
           setIsLoaded(true);
-          setClients(result);
+          setEmployees(result);
         },
         (error) => {
           setIsLoaded(true);
           setIsError(true);
-          setClients('Nada encontrado');
+          setEmployees('Nada encontrado');
         }
       )
   }
 
   const handleChange = (e) => {
-    setClientEdit(state => (
+    setEmployeeEdit(state => (
       { ...state, [e.target.name]: e.target.value }
     ));
   };
@@ -157,30 +157,30 @@ const Tables = (props) => {
         <div className="col">
           <Card className="shadow">
             <CardHeader className="border-0">
-              <h3 className="mb-0">Clientes</h3>
+              <h3 className="mb-0">Employees</h3>
             </CardHeader>
             <Table className="align-items-center table-flush" responsive>
               <thead className="thead-light">
                 <tr>
-                  <th scope="col">Cliente</th>
+                  <th scope="col">Employee</th>
                   <th scope="col">Endereço</th>
                   <th scope="col" />
                 </tr>
               </thead>
               <tbody>
                 {isLoaded && !isError ? (
-                  clients.map(client => (
-                    <tr key={client.id}>
+                  employees.map(employee => (
+                    <tr key={employee.id}>
                       <th scope="row">
                         <Media className="align-items-center">
                           <Media>
                             <span className="mb-0 text-sm">
-                              {client.name}
+                              {employee.name}
                             </span>
                           </Media>
                         </Media>
                       </th>
-                      <td>{client.address}</td>
+                      <td>{employee.address}</td>
                       <td className="text-right">
                         <UncontrolledDropdown>
                           <DropdownToggle
@@ -194,10 +194,10 @@ const Tables = (props) => {
                             <i className="fas fa-ellipsis-v" />
                           </DropdownToggle>
                           <DropdownMenu className="dropdown-menu-arrow" right>
-                            <DropdownItem onClick={() => toggle(client.id)}>
+                            <DropdownItem onClick={() => toggle(employee.id)}>
                               Editar
                             </DropdownItem>
-                            <DropdownItem onClick={() => deleteClient(client.id)}>
+                            <DropdownItem onClick={() => deleteEmployee(employee.id)}>
                               Excluir
                             </DropdownItem>
                           </DropdownMenu>
@@ -223,15 +223,15 @@ const Tables = (props) => {
           <ModalHeader toggle={toggle}>Modal title</ModalHeader>
           <form className="px-4" ref={form} onSubmit={submit}>
             <ModalBody>
-              {clientEditStatus === true ? (
+              {employeeEditStatus === true ? (
                 <>
                   <div className="form-group">
                     <label htmlFor="name">Nome completo</label>
-                    <input type="text" id="name" name="name" className="form-control" placeholder="Ex: José Almeida" value={clientEdit.name} onChange={handleChange} required />
+                    <input type="text" id="name" name="name" className="form-control" placeholder="Ex: José Almeida" value={employeeEdit.name} onChange={handleChange} required />
                   </div>
                   <div className="form-group">
                     <label htmlFor="address">Endereço</label>
-                    <input type="text" id="address" name="address" className="form-control" placeholder="Ex: Av. Paulista 997 - São Paulo" value={clientEdit.address} onChange={handleChange} required />
+                    <input type="text" id="address" name="address" className="form-control" placeholder="Ex: Av. Paulista 997 - São Paulo" value={employeeEdit.address} onChange={handleChange} required />
                   </div>
                   {status === 'success' ? (
                     <>
