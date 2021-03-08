@@ -17,25 +17,13 @@
 */
 import React from "react";
 
-// reactstrap components
-import {
-  Container,
-} from "reactstrap";
-// core components
-import Header from "../../components/Headers/Header.js";
-import AppointmentsTable from "./AppointmentsTable.js";
-
-const Tables = () => {
+const Header = () => {
   return (
     <>
-      <Header />
-      {/* Page content */}
-      <Container className="mt--7 mb-4" fluid>
-        {/* Table */}
-        <AppointmentsTable />
-      </Container>
+      <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
+      </div>
     </>
   );
 };
 
-export default Tables;
+export default Header;

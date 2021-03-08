@@ -15,48 +15,12 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 // reactstrap components
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
 
 const Header = () => {
-  const [clientsNumber, setClientsNumber] = useState([]);
-  const [employeesNumber, setEmployeesNumber] = useState([]);
-
-  useEffect(() => {
-    let hClientsMount = true;
-    let hEmployeesMount = true;
-    setClientsNumber('Carregando');
-    setEmployeesNumber('Carregando');
-    fetch("http://localhost:3001/api/clients")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          if (hClientsMount) {
-            setClientsNumber(Object.keys(result).length);
-            hClientsMount = false;
-          }
-        },
-        (error) => {
-          setClientsNumber('Nada encontrado');
-        }
-      )
-      fetch("http://localhost:3001/api/employees")
-        .then(res => res.json())
-        .then(
-          (result) => {
-            if (hEmployeesMount) {
-              setEmployeesNumber(Object.keys(result).length);
-              hEmployeesMount = false;
-            }
-          },
-          (error) => {
-            setEmployeesNumber('Nada encontrado');
-          }
-        )
-  }, [])
-
   return (
     <>
       <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
@@ -66,18 +30,13 @@ const Header = () => {
             <Row>
               <Col lg="12" xl="4">
                 <Card className="card-stats mb-4 mb-xl-0">
+                  <a href="clients-add">
                   <CardBody>
                     <Row>
                       <div className="col">
-                        <CardTitle
-                          tag="h5"
-                          className="text-uppercase text-muted mb-0"
-                        >
-                          Clientes
+                        <CardTitle tag="h2" className="text-muted mt-2 mb-0">
+                          Cadastrar Cliente
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">
-                          {clientsNumber}
-                        </span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -86,52 +45,47 @@ const Header = () => {
                       </Col>
                     </Row>
                   </CardBody>
+                  </a>
                 </Card>
               </Col>
               <Col lg="12" xl="4">
                 <Card className="card-stats mb-4 mb-xl-0">
-                  <CardBody>
-                    <Row>
-                      <div className="col">
-                        <CardTitle
-                          tag="h5"
-                          className="text-uppercase text-muted mb-0"
-                        >
-                          Funcionários
+                  <a href="employees-add">
+                    <CardBody>
+                      <Row>
+                        <div className="col">
+                          <CardTitle tag="h2" className="text-muted mt-2 mb-0">
+                            Cadastrar Funcionário
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">
-                          {employeesNumber}
-                        </span>
-                      </div>
-                      <Col className="col-auto">
-                        <div className="icon icon-shape bg-warning text-white rounded-circle shadow">
-                          <i className="ni ni-scissors" />
                         </div>
-                      </Col>
-                    </Row>
-                  </CardBody>
+                        <Col className="col-auto">
+                          <div className="icon icon-shape bg-warning text-white rounded-circle shadow">
+                            <i className="ni ni-scissors" />
+                          </div>
+                        </Col>
+                      </Row>
+                    </CardBody>
+                  </a>
                 </Card>
               </Col>
               <Col lg="12" xl="4">
                 <Card className="card-stats mb-4 mb-xl-0">
-                  <CardBody>
-                    <Row>
-                      <div className="col">
-                        <CardTitle
-                          tag="h5"
-                          className="text-uppercase text-muted mb-0"
-                        >
-                          Agendamentos
+                  <a href="appointments-add">
+                    <CardBody>
+                      <Row>
+                        <div className="col">
+                          <CardTitle tag="h2" className="text-muted mt-2 mb-0">
+                            Realizar Agendamento
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">924</span>
-                      </div>
-                      <Col className="col-auto">
-                        <div className="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                          <i className="ni ni-calendar-grid-58" />
                         </div>
-                      </Col>
-                    </Row>
-                  </CardBody>
+                        <Col className="col-auto">
+                          <div className="icon icon-shape bg-success text-white rounded-circle shadow">
+                            <i className="ni ni-calendar-grid-58" />
+                          </div>
+                        </Col>
+                      </Row>
+                    </CardBody>
+                  </a>
                 </Card>
               </Col>
             </Row>

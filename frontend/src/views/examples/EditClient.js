@@ -51,7 +51,7 @@ const Tables = () => {
         <>
             <Header />
             {/* Page content */}
-            <Container className="my--7" fluid>
+            <Container className="mt--7 mb-4" fluid>
                 {/* Table */}
                 <Row>
                     <div className="col">

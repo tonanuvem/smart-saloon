@@ -33,7 +33,7 @@ import {
 
 import Header from "../components/Headers/Header.js";
 import Clients from "./examples/ClientsTable.js";
-import Appointments from "./examples/Appointments.js";
+import Appointments from "./examples/AppointmentsTable.js";
 
 const Index = (props) => {
   if (window.Chart) {

@@ -15,7 +15,13 @@ class ClientController extends Controller
 
     public function store(Request $request)
     {
-        Client::create($request->all());
+        $saved = Client::create($request->all());
+        if ($saved) {
+            return array(
+                "status" => "success",
+                "data" => $saved->fresh()
+            );
+        }
     }
 
     public function show($id)
@@ -27,11 +33,22 @@ class ClientController extends Controller
     {
         $client = Client::findOrFail($id);
         $client->update($request->all());
+        if ($client) {
+            return array(
+                "status" => "success",
+                "data" => $client->fresh()
+            );
+        }
     }
 
     public function destroy($id)
     {
         $client = Client::findOrFail($id);
         $client->delete();
+        if ($client) {
+            return array(
+                "status" => "success"
+            );
+        }
     }
 }

@@ -17,7 +17,9 @@
 */
 import Index from "./views/Index.js";
 import Clients from "./views/examples/Clients.js";
+import ClientsAdd from "./views/examples/ClientsAdd.js";
 import Employees from "./views/examples/Employees.js";
+import EmployeesAdd from "./views/examples/EmployeesAdd.js";
 import Appointments from "./views/examples/Appointments.js";
 
 var routes = [
@@ -38,12 +40,28 @@ var routes = [
     showOnMenu: true,
   },
   {
+    path: "/clients-add",
+    name: "Cadastrar Cliente",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: ClientsAdd,
+    layout: "/admin",
+    showOnMenu: false,
+  },
+  {
     path: "/employees",
     name: "Funcionários",
     icon: "ni ni-single-02 text-yellow",
     component: Employees,
     layout: "/admin",
     showOnMenu: true,
+  },
+  {
+    path: "/employees-add",
+    name: "Cadastrar Funcionário",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: EmployeesAdd,
+    layout: "/admin",
+    showOnMenu: false,
   },
   {
     path: "/appointments",

@@ -15,7 +15,13 @@ class EmployeeController extends Controller
 
     public function store(Request $request)
     {
-        Employee::create($request->all());
+        $saved = Employee::create($request->all());
+        if ($saved) {
+            return array(
+                "status" => "success",
+                "data" => $saved->fresh()
+            );
+        }
     }
 
     public function show($id)
@@ -27,11 +33,22 @@ class EmployeeController extends Controller
     {
         $employee = Employee::findOrFail($id);
         $employee->update($request->all());
+        if ($employee) {
+            return array(
+                "status" => "success",
+                "data" => $employee->fresh()
+            );
+        }
     }
 
     public function destroy($id)
     {
         $employee = Employee::findOrFail($id);
         $employee->delete();
+        if ($employee) {
+            return array(
+                "status" => "success"
+            );
+        }
     }
 }
