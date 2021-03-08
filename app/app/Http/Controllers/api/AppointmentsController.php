@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Appointments;
 
 class AppointmentsController extends Controller
 {
@@ -18,16 +19,6 @@ class AppointmentsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return Appointments::create($request->all());
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -35,18 +26,28 @@ class AppointmentsController extends Controller
      */
     public function store(Request $request)
     {
-        $idClient   = $request->id_client;
-        $idEmployee = $request->id_employee;
-        $date       = $request->date_current;
-
         $returnAppointments  = Appointments::all();
-        foreach ($returnAppointment as $value) {
-            
-            if ($idEmployee === $value->id_employee) {
-                if ($date !== $value->date_current) {
-                    Appointments::create($request);
-                }
+        foreach ($returnAppointments as $key => $value) {
+            if($value["id_client"] == $request["id_client"] && $value["date_current"] == $request["date_current"]) {
+                return array(
+                    "status" => "error",
+                    "message" => "O cliente já possui esse mesmo horário agendado"
+                );
             }
+            if($value["id_employee"] == $request["id_employee"] && $value["date_current"] == $request["date_current"]) {
+                return array(
+                    "status" => "error",
+                    "message" => "O funcionário já possui esse mesmo horário agendado"
+                );
+            }
+        }
+
+        $saved = Appointments::create($request->all());
+        if ($saved) {
+            return array(
+                "status" => "success",
+                "data" => $saved->fresh()
+            );
         }
     }
 
@@ -58,17 +59,17 @@ class AppointmentsController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $returnAppointments  = Appointments::all();
-        foreach ($returnAppointment as $value) {
-            if ($idEmployee === $value->id_employee) {
-                return $value;
-            }
-            if ($idClient === $value->id_client) {
-                return $value;
-            }
-        }
+        // $returnAppointments  = Appointments::all();
+        // foreach ($returnAppointment as $value) {
+        //     if ($idEmployee === $value->id_employee) {
+        //         return $value;
+        //     }
+        //     if ($idClient === $value->id_client) {
+        //         return $value;
+        //     }
+        // }
     }
-    
+
     /**
      * Remove the specified resource from storage.
      *

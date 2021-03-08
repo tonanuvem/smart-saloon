@@ -16,7 +16,7 @@ class Appointments extends Model
      */
 
     protected $fillable = [
-        'id_client'
+        'id_client',
         'id_employee',
         'date_current',
     ];
