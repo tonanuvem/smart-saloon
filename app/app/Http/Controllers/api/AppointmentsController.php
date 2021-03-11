@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Appointments;
+use App\Models\Client;
 
 class AppointmentsController extends Controller
 {
@@ -78,7 +79,12 @@ class AppointmentsController extends Controller
      */
     public function destroy($id)
     {
-        $client = Appointments::findOrFail($id);
-        $client->delete();
+        $appointment = Appointments::findOrFail($id);
+        $appointment->delete();
+        if ($appointment) {
+            return array(
+                "status" => "success"
+            );
+        }
     }
 }
