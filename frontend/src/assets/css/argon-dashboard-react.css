@@ -16144,4 +16144,7 @@ button:focus, :focus {
 .table .badge i {
   margin-right: 10px; }
 
+.header .card {
+    cursor: pointer;
+}
 /*# sourceMappingURL=argon-dashboard-react.css.map */

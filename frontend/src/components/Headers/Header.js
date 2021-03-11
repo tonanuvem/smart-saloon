@@ -15,12 +15,76 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
+import Datetime from 'react-datetime';
+import "react-datetime/css/react-datetime.css";
 
 // reactstrap components
-import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
+import {
+  Card,
+  CardBody,
+  CardTitle,
+  Container,
+  Row,
+  Col,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter } from "reactstrap";
 
-const Header = () => {
+const Header = (props) => {
+  const [status, setStatus] = useState('')
+  const [modal, setModal] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [modalStatus, setModalStatus] = useState(false);
+  const [clientField, setClientField] = useState([]);
+  const [employeeField, setEmployeeField] = useState([]);
+
+  const { className } = props;
+  const form = useRef(null);
+
+  const toggle = (id) => {
+    if (modalStatus === false) {
+      searchEmployee(id);
+      setModal(!modal);
+      setModalStatus(true);
+    } else {
+      setModal(!modal);
+      setModalStatus(false);
+      setStatus(false);
+    }
+  }
+
+  const searchEmployee = (id) => {
+  }
+
+
+
+  const submit = (e) => {
+    e.preventDefault();
+
+    // fetch(`http://localhost:3001/api/employees/${employeeEdit.id}`,
+    //   {
+    //     method: 'PUT',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({ name: employeeEdit.name, address: employeeEdit.address, })
+    //   })
+    //   .then(res => res.json())
+    //   .then(
+    //     (result) => {
+    //       if (result.status === "success") {
+    //         setStatus("success");
+    //         searchEmployee(employeeEdit.id);
+    //         loadAll();
+    //       }
+    //     }
+    //   )
+  }
+
   return (
     <>
       <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
@@ -70,8 +134,7 @@ const Header = () => {
               </Col>
               <Col lg="12" xl="4">
                 <Card className="card-stats mb-4 mb-xl-0">
-                  <a href="appointments-add">
-                    <CardBody>
+                    <CardBody onClick={() => toggle()}>
                       <Row>
                         <div className="col">
                           <CardTitle tag="h2" className="text-muted mt-2 mb-0">
@@ -85,12 +148,45 @@ const Header = () => {
                         </Col>
                       </Row>
                     </CardBody>
-                  </a>
                 </Card>
               </Col>
             </Row>
           </div>
         </Container>
+      </div>
+
+      <div>
+        <Modal isOpen={modal} toggle={toggle} className={className}>
+          <ModalHeader toggle={toggle}>Realizar Agendamento</ModalHeader>
+          <form className="px-4" ref={form} onSubmit={submit}>
+            <ModalBody>
+              <div className="form-group">
+                <label htmlFor="name_client">Cliente</label>
+                <select name="name_client" id="name_client" className="form-control" required>
+                  <option value="">Carregando</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="name_employee">Funcionário</label>
+                <select name="name_employee" id="name_employee" className="form-control" required>
+                  <option value="">Carregando</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="date_current">Horário</label>
+                <Datetime input={false}/>
+              </div>
+            </ModalBody>
+            <ModalFooter>
+              {status === 'success' ? (
+                <> </>
+              ) : (
+                  <Button color="success">Salvar</Button>
+                )}
+              <Button color="secondary" onClick={toggle}>Voltar</Button>
+            </ModalFooter>
+          </form>
+        </Modal>
       </div>
     </>
   );

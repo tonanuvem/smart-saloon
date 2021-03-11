@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 
 // reactstrap components
 import {
@@ -26,70 +26,13 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   Table,
-  Row,
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter
+  Row
 } from "reactstrap";
 
-const Tables = (props) => {
-  const [status, setStatus] = useState('')
+const Tables = () => {
   const [appointments, setAppointments] = useState([]);
-  const [appointmentEditStatus, setAppointmentEditStatus] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [modal, setModal] = useState(false);
-  const [modalStatus, setModalStatus] = useState(false);
-
-  const [appointmentEdit, setAppointmentEdit] = useState({
-    id: "",
-    name: "",
-    address: ""
-  });
-
-  const {
-    className
-  } = props;
-
-  const form = useRef(null);
-
-  const submit = e => {
-    e.preventDefault();
-
-    fetch(`http://localhost:3001/api/appointments/${appointmentEdit.id}`,
-      {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ name: appointmentEdit.name, address: appointmentEdit.address, })
-      })
-      .then(res => res.json())
-      .then(
-        (result) => {
-          if (result.status === "success") {
-            setStatus("success");
-            searchAppointment(appointmentEdit.id);
-            loadAll();
-          }
-        }
-      )
-  }
-
-  const toggle = (id) => {
-    if (modalStatus === false) {
-      searchAppointment(id);
-      setModal(!modal);
-      setModalStatus(true);
-    } else {
-      setModal(!modal);
-      setModalStatus(false);
-      setStatus(false);
-      setAppointmentEditStatus(false);
-    }
-  }
 
   const deleteAppointment = (id) => {
     fetch(`http://localhost:3001/api/appointments/${id}`, { method: 'DELETE', body: '' })
@@ -99,28 +42,6 @@ const Tables = (props) => {
           if (result.status === "success") {
             loadAll();
           }
-        }
-      )
-  }
-
-  const searchAppointment = (id) => {
-    fetch(`http://localhost:3001/api/appointments/${id}`)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          console.log(result);
-          setAppointmentEdit({
-            id: result.id,
-            name: result.name,
-            address: result.address
-          });
-          setAppointmentEditStatus(true);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setIsError(true);
-          setAppointmentEdit('Nada encontrado');
         }
       )
   }
@@ -144,12 +65,6 @@ const Tables = (props) => {
         }
       )
   }
-
-  const handleChange = (e) => {
-    setAppointmentEdit(state => (
-      { ...state, [e.target.name]: e.target.value }
-    ));
-  };
 
   return (
     <>
