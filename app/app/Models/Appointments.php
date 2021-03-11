@@ -19,5 +19,19 @@ class Appointments extends Model
         'id_client',
         'id_employee',
         'date_current',
+        'name_client',
+        'name_employee',
     ];
+
+    protected $guarded = [];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }

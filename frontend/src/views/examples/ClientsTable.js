@@ -220,7 +220,7 @@ const Tables = (props) => {
 
       <div>
         <Modal isOpen={modal} toggle={toggle} className={className}>
-          <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+          <ModalHeader toggle={toggle}>Editar Cliente</ModalHeader>
           <form className="px-4" ref={form} onSubmit={submit}>
             <ModalBody>
               {clientEditStatus === true ? (

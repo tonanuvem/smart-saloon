@@ -18,4 +18,11 @@ class Employee extends Model
         'name',
         'address',
     ];
+
+    protected $guarded = [];
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointments::class);
+    }
 }
