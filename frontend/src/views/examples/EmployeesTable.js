@@ -157,12 +157,12 @@ const Tables = (props) => {
         <div className="col">
           <Card className="shadow">
             <CardHeader className="border-0">
-              <h3 className="mb-0">Employees</h3>
+              <h3 className="mb-0">Funcionários</h3>
             </CardHeader>
             <Table className="align-items-center table-flush" responsive>
               <thead className="thead-light">
                 <tr>
-                  <th scope="col">Employee</th>
+                  <th scope="col">Funcionário</th>
                   <th scope="col">Endereço</th>
                   <th scope="col" />
                 </tr>
@@ -220,7 +220,7 @@ const Tables = (props) => {
 
       <div>
         <Modal isOpen={modal} toggle={toggle} className={className}>
-          <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+          <ModalHeader toggle={toggle}>Editar Funcionário</ModalHeader>
           <form className="px-4" ref={form} onSubmit={submit}>
             <ModalBody>
               {employeeEditStatus === true ? (
